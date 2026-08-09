@@ -1,105 +1,104 @@
 # Multi-round example
 
-This synthetic, fictional example demonstrates intended behavior. It is not field validation. Every event described below belongs only to the illustrative scenario; never copy its goals, feedback, artifacts, or results into a real user's ledger.
+This synthetic, fictional example demonstrates intended behavior. It is not field validation. Every event belongs only to the scenario below and must never be copied into a real user's ledger.
 
-## Scenario
+## Scenario and scope
 
-The fictional user is preparing a community reading event. In the prompt below, the user explicitly states both the delivery goal and target capability. Do not infer either goal from the topic alone in a real conversation.
+The fictional user is preparing a community reading event.
+
+- Delivery goal: run the community reading event.
+- Target capability: turn ambiguous resident feedback into a testable event-design judgment.
+- Task family: community-event planning decisions based on qualitative feedback.
+- Scope limit: the example says nothing about broader research, facilitation, or product-management capability.
 
 ## Start
 
 User:
 
-> My delivery goal is to run the community reading event. Separately, I want to practise this capability: turning vague resident feedback into decisions I can test.
+> My delivery goal is to run the community reading event. Separately, I want to practise turning vague resident feedback into decisions I can test.
 
-Assistant, naturally:
+Assistant:
 
-> We will keep two outcomes separate: whether the event runs, and whether you can turn an ambiguous comment into a decision with an observable test. For the first attempt, choose one real comment, write what is ambiguous, what decision it could change, and what you would observe afterward. I will critique only after your first pass. What is the closest thing you have to a resident's original wording?
+> We will keep the event delivery and the capability evidence separate. For the first attempt, choose one real comment, write what is ambiguous, what decision it could change, and what you would observe afterward. I will critique only after your first pass. What is the closest thing you have to the resident's original wording?
 
-The assistant does not invent a plausible resident quote. If the user has no real source statement, it may offer a clearly labelled illustrative exercise, but that exercise is not external evidence and cannot be recorded as resident feedback. The working ledger remains compact in context. No capability state is earned yet because no performance has been observed.
+The assistant does not invent a resident quote. No capability state is earned because no performance has been observed.
 
-## Checkpoint 1
+## Attempt A1
 
-Within this fictional example, the user supplies a source-attributed real comment but asks the AI to supply the ambiguity analysis and test design. The example does not fabricate or quote the comment. The event plan improves and is used.
+The user supplies a source-attributed comment and asks the AI to generate the ambiguity analysis and test design. The event plan improves and is used.
 
-Natural response:
+Checkpoint:
 
-> The plan moved forward, so there is delivery evidence. For the capability goal, the useful judgment was mostly produced by AI after you selected the source comment. That gives us a worked example, not evidence that you can yet perform the full reasoning. Next time, write the ambiguity and test before asking for critique.
+> The plan moved forward, so there is delivery evidence. The analysis and test design were generated before your own attempt, so they do not show that you can perform that reasoning yet. Your contribution does show that you selected a relevant source. Next time, complete the ambiguity and test fields before asking for critique.
 
-Ledger change:
+Ledger:
 
-- Delivery evidence: the event plan incorporated a feedback-driven change.
-- Capability evidence: the user selected relevant source material.
-- Assistance: substantial AI reasoning; no prior comparison.
-- State: none assigned; the `emerging` threshold has not been met for the full target behavior.
+- Relationship: `initial`.
+- User first attempt: absent for the full target behavior.
+- Assistance phase: `pre_attempt`.
+- Supplied target behavior: `yes`.
+- Delivery evidence: the plan incorporated a feedback-driven change.
+- Capability evidence: relevant-source selection only.
+- State: no state earned.
 - Capability debt: independent ambiguity analysis and test design remain unseen.
 
-## Checkpoint 2 and transition proposal
+## Attempt A2 and proposed `emerging`
 
-On a similar planning decision, the user writes the ambiguity, proposed design change, and observable test before the AI responds. The AI only points out one untested assumption; the user revises it.
+On a similar planning decision, the user writes the ambiguity, proposed design change, and observable test before the AI responds. The AI identifies one untested assumption after the first attempt; the user revises it.
 
 Before proposing a transition, expose the ledger:
 
 > **Evidence ledger**
 >
-> - Delivery goal: run the community reading event.
-> - Target capability: turn ambiguous resident feedback into a testable event-design judgment.
-> - Current state: none assigned; `emerging` evidence is not yet complete.
-> - Delivery evidence: two planning decisions were changed using resident feedback (`human` and `external_evidence`).
-> - Capability evidence: on the second attempt, you independently identified the ambiguity, linked it to a decision, and proposed an observable test (`human`); AI supplied one critique after the first attempt (`ai_reasoning`).
-> - Assistance change: reduced from AI-generated reasoning to post-attempt critique.
-> - Capability debt: only one complete effective instance; repeatability is untested.
+> - Scoped capability: turn ambiguous resident feedback into a testable event-design judgment within community-event planning.
+> - Current state: no state earned.
+> - Attempt A1: source selection by the user; target reasoning generated by AI before a user attempt.
+> - Attempt A2: complete user first attempt with ambiguity, decision link, and observable test; AI critique followed the attempt.
+> - Assistance change: reduced and less substitutive.
+> - Evidence against upgrade: only one complete user-authored instance.
+> - Capability debt: repeatability and adjacent transfer remain untested.
 > - Next challenge: perform the same reasoning on another similar comment before critique.
 >
-> This supports a proposed transition to `emerging`, not mastery. Does this ledger accurately describe what you and the AI each did?
+> This supports a proposed transition to `emerging`. Does this ledger accurately describe what you and the AI each did?
 
-The user's confirmation can correct provenance, but cannot create the transition evidence. If the ledger is accurate, the state becomes `emerging` because one effective instance already exists.
+User confirmation can correct the record. The evidence for `emerging` comes from A2.
 
-## Checkpoint 3 and transition proposal
+## Attempt A3 and proposed `repeatable`
 
-The user repeats the behavior on another feedback item. They complete the first pass independently, and the AI critique does not change the core judgment.
+The user repeats the behavior on another feedback item. Their first attempt is complete, and post-attempt critique does not change the core judgment.
 
-Expose the ledger before proposing another transition:
+The transition review records:
 
-- Two effective instances now exist on similar planning tasks.
-- Assistance was reduced on checkpoint 2 and remained similar on checkpoint 3.
-- The capability evidence concerns the user's first drafts, not the polished final plan.
-- Capability debt now centers on adjacent-problem transfer and context isolation.
+- the target behavior is visible in A2 and A3;
+- both attempts have preserved user first drafts;
+- assistance stayed post-attempt and did not become more substitutive;
+- the claim remains scoped to the named task family;
+- adjacent transfer remains capability debt.
 
-This supports a proposed transition from `emerging` to `repeatable`, subject to factual verification of the ledger. It does not support `transfer-evidenced`.
+This can support a proposed transition from `emerging` to `repeatable`.
 
-## Contaminated transfer
+## Transfer T1: contaminated
 
-The user stays in the same conversation, can see both previous analyses, and receives a reminder of the three-part pattern before attempting a new volunteer-onboarding problem. They perform well.
+The user stays in the same conversation. Prior analyses remain visible, and the AI reminds them of the three-part pattern before a volunteer-onboarding problem.
 
-Natural response:
+The result may be effective practice. Isolation is `contaminated` because a solution pattern was supplied before the first attempt. The state remains `repeatable`.
 
-> This is useful evidence that you can reuse the pattern with the prior examples visible. It is not clean independent-transfer evidence because the current conversation contains the earlier reasoning and I reminded you of the structure. We should keep the state at `repeatable`. The remaining debt is a fresh adjacent problem under stronger isolation, with your first attempt completed before any hints.
+## Transfer T2: clean
 
-Ledger change:
+In a fresh session, the user receives only a new adjacent problem about interpreting ambiguous volunteer feedback.
 
-- Transfer result: effective but contaminated.
-- Isolation: same session; prior examples visible; AI reminder supplied before the attempt.
-- State: remains `repeatable`.
-- Capability debt: clean adjacent transfer remains untested.
+Conditions:
 
-## Clean transfer
+- prior answers and artifacts are unavailable;
+- no structure or hint is supplied before the attempt;
+- the user completes and preserves a first version;
+- the evaluator checks the same bounded target behavior;
+- the ledger explains why the problem is adjacent.
 
-In a new session, the user receives only a fresh adjacent problem about interpreting ambiguous volunteer feedback. Prior answers and artifacts are unavailable. The user completes a first version before AI evaluation and independently identifies ambiguity, connects it to an operational decision, and specifies an observable test.
+An effective result under these conditions can support a proposed transition to `transfer-evidenced`. The claim remains scoped to the recorded capability and task family.
 
-Before proposing the final transition, expose the ledger, including:
+## Missing-goal variant
 
-- the adjacent problem and why it belongs to the same capability family;
-- the user's first-attempt artifact;
-- the absence of pre-attempt AI hints;
-- the isolation controls used;
-- any external result or unresolved quality issue;
-- the accumulated evidence and remaining debt.
+When a real checkpoint begins without an explicit delivery goal or target capability, keep them unknown or use a clearly proposed temporary framing:
 
-If the evidence is accurate and effective, the AI may propose `transfer-evidenced`. The user verifies the record; neither the AI's confidence nor the user's agreement substitutes for the performance evidence.
-
-## Missing-goal checkpoint variant
-
-If a real checkpoint begins without an explicit delivery goal or target capability in available context, do not borrow the goals from this scenario. Keep them unknown, or say that a framing is tentative and proposed. For example:
-
-> The delivery goal is unknown from the context I have. For this round, I am tentatively treating “turn feedback into a testable decision” as the capability under review; that is my proposed framing, not a goal you previously stated. What delivery were you trying to complete?
+> The delivery goal is unknown from the context I have. For this round, I am tentatively treating “turn feedback into a testable decision” as the capability under review; that is a proposed framing. What delivery were you trying to complete?

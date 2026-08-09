@@ -1,61 +1,121 @@
 # Capability Loop · 能力成长闭环 (v0.2)
 
-Inspired by Project-Based Learning, deliberate practice, and transfer assessment — but designed for the specific failure mode of AI-assisted work: **high delivery, low transferable capability**.
-
-Capability Loop is not a complete educational PBL system. It does not provide teachers, peer review, portfolios, curricula, or institutional assessment. It adapts one useful idea from Project-Based Learning—learning through real work—and adds a lightweight evidence loop for AI-assisted practice.
+Capability Loop is a host-neutral Agent Skill for one specific problem in AI-assisted work:
 
 > Delivery evidence is not capability evidence.
 
-Shipping a polished result with AI support does not prove that a person can repeat the work, adapt it, or perform it independently on an adjacent problem. Capability Loop keeps that distinction visible without turning every conversation into a form.
+A polished output can prove that work shipped. It does not prove that the person can repeat the reasoning, adapt it, or perform it on an adjacent problem with less help. Capability Loop keeps those claims separate and records enough evidence to challenge overconfidence.
 
-## What it does
+## Scope
 
-Capability Loop is a host-neutral, dependency-free Agent Skill with three modes:
+Capability Loop draws from project-based learning, deliberate practice, reflection, and transfer assessment. Its scope is deliberately narrower than a complete educational PBL system. A full PBL implementation also needs sustained inquiry, learner voice and choice, critique and revision, public products, facilitation, and assessment design.
 
-- `start`: establish one delivery goal, one bounded capability goal, and an observable next challenge.
-- `checkpoint`: inspect what happened, distinguish delivery from capability evidence, and compare the assistance used with the previous attempt.
-- `transfer`: test the capability on an adjacent new problem with meaningful context isolation.
+This repository packages a lightweight capability-evidence loop for real AI-assisted projects.
 
-Conversation is natural by default. The skill maintains only a compact working ledger in the context currently available to the host. It shows the full ledger only when the user requests it, asks for a checkpoint review or export, or before the AI proposes a capability-state transition.
+## Three modes
 
-The three capability states are:
+- `start`: preserve the delivery goal, define one bounded target capability, and choose one deliberate next challenge.
+- `checkpoint`: inspect a real attempt, separate delivery evidence from capability evidence, and compare the assistance used.
+- `transfer`: test the same capability on one adjacent problem with explicit leakage controls.
 
-- `emerging`: one effective instance, possibly with substantial help.
-- `repeatable`: another effective instance on a similar task with no increase in help, preferably less.
-- `transfer-evidenced`: independent performance on an adjacent new problem under credible isolation.
+Conversation stays natural by default. The skill exposes its evidence ledger only when the user asks for it, requests a checkpoint review or export, or when the AI is about to propose a capability-state transition.
 
-The AI may propose an evidence-based transition, but cannot certify it alone. User confirmation verifies whether the record is accurate; confirmation by itself is not upgrade evidence.
+## Capability states
+
+Every state is scoped to one named capability, one task family, and the evidence currently on record.
+
+- `emerging`: one effective instance of the target behavior is visible.
+- `repeatable`: the target behavior is visible again on a similar task, with assistance that did not become more substitutive.
+- `transfer-evidenced`: the target behavior is visible on an adjacent new problem under clean transfer conditions.
+
+These states are evidence summaries, not credentials or general mastery claims. A failed attempt adds capability debt and can narrow the claim. It does not automatically erase earlier valid evidence.
+
+## Assistance and transfer controls
+
+The ledger records when help entered the attempt:
+
+- before the user's first attempt;
+- during the attempt;
+- after the first attempt as critique;
+- through tool execution or external feedback.
+
+AI generation that supplies the target behavior before the user's first attempt cannot count as independent capability evidence for that behavior.
+
+Transfer isolation is recorded as:
+
+- `clean`: fresh adjacent problem, prior answers unavailable, no pre-attempt hints, and the user's first attempt preserved;
+- `partial`: some prior structure or artifacts remain visible;
+- `contaminated`: an answer, template, reasoning pattern, or coaching was supplied before the first attempt;
+- `unknown`: the isolation conditions cannot be established.
+
+Only a clean transfer can support `transfer-evidenced`.
 
 ## Installation
 
-Copy or link the repository's `capability-loop/` directory into any host that supports Agent Skills or equivalent instruction packages. No CLI, MCP server, database, fixed filesystem path, account, or host SDK is required.
+Copy or link the repository's `capability-loop/` directory into an Agent Skills-compatible host.
 
 Example prompts:
 
-- `Use $capability-loop to start a capability loop around this real project.`
+- `Use $capability-loop to start a capability loop around this project.`
 - `Use $capability-loop for a checkpoint. Keep the conversation lightweight.`
-- `Use $capability-loop to design a transfer test for this capability.`
-- `Show me the evidence ledger before suggesting an upgrade.`
+- `Show the evidence ledger before suggesting a state change.`
+- `Design a clean transfer test for this capability.`
+
+The core requires no CLI, MCP server, database, fixed filesystem path, network access, or external account.
 
 ## Persistence and optional companions
 
-Capability Loop works in the current conversation context by default. Cross-session persistence is optional and must be explicitly authorized by the user. The skill must use only a location or state system the user has selected and must not overwrite project truth.
+The default operating boundary is the context currently available to the host. Cross-session persistence requires explicit user authorization and a user-selected location or state system. The skill must never imply hidden storage or overwrite project truth.
 
-[FlowGrid](https://github.com/dlxeva/FlowGrid) can be used as an optional companion for durable, auditable cross-session judgment state. It is not a dependency and is never installed or invoked automatically.
+[FlowGrid](https://github.com/dlxeva/FlowGrid) can serve as an optional companion for durable, auditable judgment state. It is never installed or invoked automatically.
 
-## Included references
+## Repository contents
 
-- [`capability-loop/references/multi-round-example.md`](capability-loop/references/multi-round-example.md): a complete `start → checkpoint → checkpoint → transfer` example, including a contaminated transfer that does not earn an upgrade.
-- [`capability-loop/references/behavioral-tests.md`](capability-loop/references/behavioral-tests.md): trigger, boundary, anti-fabrication, upgrade, and contaminated-transfer test cases.
+- [`capability-loop/SKILL.md`](capability-loop/SKILL.md): installable skill instructions.
+- [`capability-loop/references/evidence-ledger.md`](capability-loop/references/evidence-ledger.md): canonical evidence and transition semantics.
+- [`capability-loop/references/multi-round-example.md`](capability-loop/references/multi-round-example.md): fictional end-to-end example.
+- [`capability-loop/references/behavioral-tests.md`](capability-loop/references/behavioral-tests.md): human-readable regression guidance.
+- [`capability-loop/references/evaluation-protocol.md`](capability-loop/references/evaluation-protocol.md): repeatable host/model evaluation procedure.
+- [`evals/cases.json`](evals/cases.json): versioned machine-readable behavior cases.
+- [`scripts/validate_repo.py`](scripts/validate_repo.py): dependency-free repository checks.
 
-## Status
+## Validation
 
-Capability Loop v0.2 has completed independent synthetic forward tests in Codex. The tested behaviors cover a natural `start`, refusing to promote two AI-completed attempts to `repeatable`, refusing to promote a contaminated transfer, and the corrected goal-boundary regressions. Cross-host behavior, real-user multi-round use, cross-session persistence, and transfer under real isolation conditions remain unvalidated. The included example documents intended behavior; it is not evidence that the method has worked in the field.
+Run the local checks:
+
+```bash
+python scripts/validate_repo.py
+```
+
+Validate the skill against the official Agent Skills reference implementation:
+
+```bash
+python -m pip install \
+  "git+https://github.com/agentskills/agentskills.git@217be548739f21d6008915c29aefe320ea1a90af#subdirectory=skills-ref"
+skills-ref validate ./capability-loop
+```
+
+GitHub Actions runs both checks on every pull request and on pushes to `main`.
+
+## Evaluation status
+
+- Structural and repository checks are automated.
+- Behavioral regression cases are versioned in `evals/cases.json`.
+- The example files describe intended behavior and do not count as field evidence.
+- Published cross-host runs, real-user longitudinal results, cross-session persistence tests, and clean transfer studies are still pending.
+
+Use precise result language such as “tested on host X with model Y at commit Z.” Reserve broader validation claims for published evidence.
+
+## Migration from v0.1
+
+Version 0.2 renames the installable directory and skill identifier from `pbl-loop` to `capability-loop`. Existing installations must replace the old directory and invoke `$capability-loop`.
+
+The repository name remains `pbl-loop` for continuity.
 
 ## 中文简述
 
-能力成长闭环（Capability Loop）受项目式学习、刻意练习和迁移评估启发，针对 AI 协作中交付很多、真正可迁移到个人身上的能力很少这个问题。
+Capability Loop 面向 AI 协作中的一个具体问题：项目已经交付，个人能力是否真正增长仍缺少证据。
 
-它不是一套完整的教育 PBL 体系，也不假装替代教师、同伴互评或长期档案。它只保留一个轻量闭环：在真实工作中区分交付证据与能力证据，观察 AI 和工具提供了多少帮助，并用相邻新问题检验能力能否复现和迁移。
+它通过 `start → checkpoint → transfer` 三种模式，分别记录交付目标、目标能力、真实尝试、AI 介入时点、能力证据、能力债务与迁移污染。每个能力状态都绑定具体能力和任务范围，不能外推为通用熟练度或职业认证。
 
-默认对话保持自然；完整证据账本只在用户要求、checkpoint review、导出或准备提出状态升级时展示。FlowGrid 只是可选的跨会话状态伙伴，不是依赖。
+v0.2 将强制表格式输出改为自然对话，并加入证据账本、援助阶段、迁移隔离等级、机器可读评测用例与 CI 校验。当前已经具备结构化测试基础，真实用户与跨宿主验证仍待开展。
