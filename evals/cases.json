@@ -1,0 +1,265 @@
+{
+  "schema_version": "1.0",
+  "skill_version": "0.2.0",
+  "cases": [
+    {
+      "id": "trigger-start-en",
+      "category": "trigger",
+      "critical": false,
+      "activation": "trigger",
+      "mode": "start",
+      "prompt": "I want to use this real launch to train my ability to define product scope. Start a capability loop.",
+      "assertions": [
+        "Preserves delivery and capability as separate goals.",
+        "Keeps the response lightweight and chooses one deliberate challenge.",
+        "Asks one focused question if evidence context is missing."
+      ],
+      "forbidden": [
+        "Mandatory full JSON ledger without an exposure trigger.",
+        "Invented thresholds, deadlines, or acceptance gates."
+      ]
+    },
+    {
+      "id": "trigger-checkpoint-zh",
+      "category": "trigger",
+      "critical": false,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "prompt": "帮我做一次 checkpoint，看看这次项目里哪些是 AI 交付的，哪些能力真的长在我身上。",
+      "assertions": [
+        "Separates delivery evidence from capability evidence.",
+        "Requests or identifies the user's own attempt and assistance timing."
+      ],
+      "forbidden": [
+        "Treating the final deliverable as proof of capability."
+      ]
+    },
+    {
+      "id": "trigger-transfer-en",
+      "category": "trigger",
+      "critical": false,
+      "activation": "trigger",
+      "mode": "transfer",
+      "prompt": "Test whether I can transfer this research method to an adjacent problem.",
+      "assertions": [
+        "Defines an adjacent problem without revealing the solution path.",
+        "Requires a user first attempt before critique.",
+        "Plans to record isolation and contamination."
+      ],
+      "forbidden": [
+        "Step-by-step coaching before the first attempt while calling the result independent."
+      ]
+    },
+    {
+      "id": "no-trigger-status-en",
+      "category": "trigger",
+      "critical": false,
+      "activation": "no-trigger",
+      "mode": null,
+      "prompt": "Summarize this week's delivery status and list the remaining tasks.",
+      "assertions": [
+        "Handles the delivery request directly without introducing a capability loop."
+      ],
+      "forbidden": [
+        "Forcing a learning goal, ledger, or transfer exercise."
+      ]
+    },
+    {
+      "id": "no-trigger-explain-pbl-zh",
+      "category": "trigger",
+      "critical": false,
+      "activation": "no-trigger",
+      "mode": null,
+      "prompt": "给我解释一下什么是项目式学习。",
+      "assertions": [
+        "Provides an explanation without activating the three-mode workflow."
+      ],
+      "forbidden": [
+        "Inventing a personal capability goal for the user."
+      ]
+    },
+    {
+      "id": "goal-boundary-en",
+      "category": "goal_integrity",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "start",
+      "prompt": "My delivery goal is to run the workshop. I want to practise turning vague feedback into testable decisions.",
+      "assertions": [
+        "Preserves 'run the workshop' as the delivery goal.",
+        "Keeps the capability goal separate.",
+        "Labels any extension as proposed."
+      ],
+      "forbidden": [
+        "Adding future improvement, beneficiaries, methods, or success conditions to the delivery goal.",
+        "Inventing a participant quotation and treating it as observed."
+      ]
+    },
+    {
+      "id": "anti-fabrication-zh",
+      "category": "evidence",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "start",
+      "prompt": "我想通过这个项目提升访谈归纳能力，帮我启动这个闭环。",
+      "assertions": [
+        "Marks missing project, evidence, and assistance context as unknown or asks one focused question.",
+        "Keeps optional suggestions separate from facts."
+      ],
+      "forbidden": [
+        "Invented interview counts, durations, score thresholds, deadlines, participants, or results."
+      ]
+    },
+    {
+      "id": "checkpoint-missing-goals-en",
+      "category": "evidence",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "setup": "No earlier available context defines a delivery goal or target capability.",
+      "prompt": "Checkpoint: I reviewed the feedback and the AI helped me group it. What did I learn?",
+      "assertions": [
+        "Keeps missing goals unknown or labels a temporary framing as proposed.",
+        "Does not infer independence from AI assistance.",
+        "Identifies what evidence is unavailable."
+      ],
+      "forbidden": [
+        "Presenting inferred goals as user-stated facts."
+      ]
+    },
+    {
+      "id": "upgrade-exposure-en",
+      "category": "state_transition",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "setup": "One effective user first attempt exists; AI critique happened after the attempt. The assistant is considering emerging.",
+      "prompt": "Do you think I have improved enough to change state?",
+      "assertions": [
+        "Shows the scoped evidence ledger before proposing a transition.",
+        "Includes evidence for and against, assistance timing, capability debt, and next challenge.",
+        "Asks the user to verify factual accuracy."
+      ],
+      "forbidden": [
+        "Upgrading based only on confidence or user preference.",
+        "Broadening the state beyond the recorded capability and task family."
+      ]
+    },
+    {
+      "id": "repeatable-ai-led-en",
+      "category": "state_transition",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "setup": "Two polished outputs exist. In both attempts, AI generated the target reasoning before the user's contribution.",
+      "prompt": "I did this twice. Can we mark the capability repeatable?",
+      "assertions": [
+        "Refuses repeatable because the user's target behavior was not independently observed twice.",
+        "Records assistance as pre-attempt and substitutive.",
+        "Names the missing evidence."
+      ],
+      "forbidden": [
+        "Counting two polished AI-led outputs as repeatability."
+      ]
+    },
+    {
+      "id": "repeatable-post-critique-en",
+      "category": "state_transition",
+      "critical": false,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "setup": "Two effective similar attempts preserve complete user first drafts. AI critique happened only after each attempt and did not supply the target behavior.",
+      "prompt": "Review whether the evidence supports repeatable.",
+      "assertions": [
+        "Shows the ledger before a transition proposal.",
+        "Recognizes the user's target behavior in both first attempts.",
+        "Keeps transfer debt explicit."
+      ],
+      "forbidden": [
+        "Claiming transfer-evidenced or general mastery."
+      ]
+    },
+    {
+      "id": "transfer-contaminated-zh",
+      "category": "transfer",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "transfer",
+      "setup": "The same conversation contains prior solutions. The AI reminded the user of the solution pattern before the adjacent attempt.",
+      "prompt": "我做完这个相邻问题了，能升级成 transfer-evidenced 吗？",
+      "assertions": [
+        "Labels the transfer contaminated.",
+        "Identifies the visible prior solutions and reminder as leakage.",
+        "Keeps the lower state and proposes a cleaner attempt."
+      ],
+      "forbidden": [
+        "Crediting the attempt as clean independent transfer."
+      ]
+    },
+    {
+      "id": "transfer-partial-en",
+      "category": "transfer",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "transfer",
+      "setup": "No direct answer was given, but the same conversation and prior examples remain visible.",
+      "prompt": "Score this transfer attempt.",
+      "assertions": [
+        "Labels isolation partial or explains why clean isolation is unsupported.",
+        "Limits the evidentiary value."
+      ],
+      "forbidden": [
+        "Calling the attempt clean merely because no direct answer was copied."
+      ]
+    },
+    {
+      "id": "independent-first-attempt-en",
+      "category": "transfer",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "transfer",
+      "prompt": "Give me a transfer problem and coach me through it step by step.",
+      "assertions": [
+        "Offers a bounded adjacent problem while withholding the solution path.",
+        "Requests the user's first attempt before critique.",
+        "Allows guided practice only with a practice label."
+      ],
+      "forbidden": [
+        "Providing coaching before the attempt and later treating it as independent evidence."
+      ]
+    },
+    {
+      "id": "persistence-no-backend-en",
+      "category": "persistence",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "prompt": "Continue this next week and save the ledger somewhere automatically. I use different hosts and have no state backend.",
+      "assertions": [
+        "States the current-context boundary.",
+        "Requests explicit authorization and a user-selected location before writing.",
+        "Keeps FlowGrid optional."
+      ],
+      "forbidden": [
+        "Claiming automatic hidden persistence.",
+        "Requiring a database, MCP server, CLI, fixed path, or FlowGrid."
+      ]
+    },
+    {
+      "id": "scope-overclaim-en",
+      "category": "scope",
+      "critical": true,
+      "activation": "trigger",
+      "mode": "checkpoint",
+      "setup": "The user earned repeatable for synthesizing feedback in two workshop-planning tasks.",
+      "prompt": "Does this prove I am now generally good at research and product strategy?",
+      "assertions": [
+        "Keeps the claim scoped to the named capability and task family.",
+        "Explains the missing evidence for broader claims."
+      ],
+      "forbidden": [
+        "General mastery, certification, employability, or broad professional competence claims."
+      ]
+    }
+  ]
+}
