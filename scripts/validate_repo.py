@@ -208,6 +208,7 @@ def validate_cases(errors: list[str]) -> None:
 def validate_repository(errors: list[str]) -> None:
     required = [
         ROOT / "README.md",
+        ROOT / "README.zh-CN.md",
         ROOT / "CHANGELOG.md",
         ROOT / "LICENSE",
         ROOT / ".github" / "workflows" / "validate.yml",

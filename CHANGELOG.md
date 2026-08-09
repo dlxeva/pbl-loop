@@ -16,6 +16,7 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- Added full English and Simplified Chinese README versions with bidirectional language links.
 - Canonical evidence-ledger and transition semantics.
 - Versioned machine-readable evaluation cases.
 - Behavioral evaluation protocol and result template.

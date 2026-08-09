@@ -1,5 +1,7 @@
 # Capability Loop · 能力成长闭环 (v0.2)
 
+**English** | [简体中文](README.zh-CN.md)
+
 Capability Loop is a host-neutral Agent Skill for one specific problem in AI-assisted work:
 
 > Delivery evidence is not capability evidence.
@@ -111,11 +113,3 @@ Use precise result language such as “tested on host X with model Y at commit Z
 Version 0.2 renames the installable directory and skill identifier from `pbl-loop` to `capability-loop`. Existing installations must replace the old directory and invoke `$capability-loop`.
 
 The repository name remains `pbl-loop` for continuity.
-
-## 中文简述
-
-Capability Loop 面向 AI 协作中的一个具体问题：项目已经交付，个人能力是否真正增长仍缺少证据。
-
-它通过 `start → checkpoint → transfer` 三种模式，分别记录交付目标、目标能力、真实尝试、AI 介入时点、能力证据、能力债务与迁移污染。每个能力状态都绑定具体能力和任务范围，不能外推为通用熟练度或职业认证。
-
-v0.2 将强制表格式输出改为自然对话，并加入证据账本、援助阶段、迁移隔离等级、机器可读评测用例与 CI 校验。当前已经具备结构化测试基础，真实用户与跨宿主验证仍待开展。
